@@ -1,0 +1,55 @@
+resource "aws_vpc" "vpc" {
+  cidr_block           = var.vpc_cidr
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+
+  tags = {
+    Name  = "${var.name}-vpc"
+    email = var.email
+  }
+}
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name  = "${var.name}-internet-gateway"
+    email = var.email
+  }
+}
+
+resource "aws_subnet" "public_subnet" {
+  count                   = length(var.subnets_cidr)
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = element(var.subnets_cidr, count.index)
+  availability_zone       = element(var.azs, count.index)
+  map_public_ip_on_launch = true
+  tags = {
+    Name  = "${var.name}-public-subnet${count.index + 1}"
+    email = var.email
+  }
+}
+
+resource "aws_route_table" "public_rt" {
+  vpc_id = aws_vpc.vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+  tags = {
+    Name  = "${var.name}-public-route-table"
+    email = var.email
+  }
+}
+
+resource "aws_route_table_association" "a" {
+  count          = length(var.subnets_cidr)
+  subnet_id      = element(aws_subnet.public_subnet.*.id, count.index)
+  route_table_id = aws_route_table.public_rt.id
+}
+output "aws_vpc" {
+  value = aws_vpc.vpc.id
+}
+
+output "public_subnets" {
+  value = aws_subnet.public_subnet[*].id
+}
