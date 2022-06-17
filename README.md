@@ -41,6 +41,4 @@ terraform apply
 ```
 
 * The terraform will deploy the AWS resources and will printout the Public URL for the Load Balancer:
-
-<img width="1214" alt="Screen Shot 2022-06-17 at 2 13 43 PM" src="https://user-images.githubusercontent.com/52199951/174287869-d7bc463e-4a95-417d-9ca5-2901d9a5c3c5.png">
-
+<img width="521" alt="Screen Shot 2022-06-17 at 2 28 20 PM" src="https://user-images.githubusercontent.com/52199951/174289889-9e4850d0-a2f6-4250-9708-a5c27ecd8d2f.png">
