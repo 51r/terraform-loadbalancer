@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "test-tf" {
 }
 
 resource "aws_lb_target_group_attachment" "ec2" {
-  count            = 2
+  count            = var.instances
   target_group_arn = aws_lb_target_group.test-tf.arn
   target_id        = var.ec2[count.index]
   port             = 80

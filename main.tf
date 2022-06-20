@@ -9,8 +9,8 @@ terraform {
 }
 
 
-module "vpc" {
-  source       = "./vpc"
+module "network" {
+  source       = "./network"
   subnets_cidr = var.public_subnets_cidr
   email        = var.email
   name         = var.name
@@ -20,11 +20,12 @@ module "vpc" {
 
 module "lb" {
   source         = "./lb"
-  public_subnets = module.vpc.public_subnets
+  public_subnets = module.network.public_subnets
   email          = var.email
   name           = var.name
-  aws_vpc        = module.vpc.aws_vpc
+  aws_vpc        = module.network.aws_vpc
   ec2            = module.app.ec2
+  instances = var.instances
 }
 
 module "app" {
@@ -32,9 +33,10 @@ module "app" {
   email        = var.email
   name         = var.name
   ami_id       = var.ami_id
-  aws_vpc      = module.vpc.aws_vpc
+  aws_vpc      = module.network.aws_vpc
   azs          = var.azs
   subnets_cidr = var.private_subnets_cidr
+  instances = var.instances
 }
 
 output "public_url" {

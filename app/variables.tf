@@ -21,3 +21,7 @@ variable "azs" {
 variable "aws_vpc" {
   description = "Specify AWS VPC ID"
 }
+
+variable "instances" {
+  description = "Specify the number of instances"
+}
