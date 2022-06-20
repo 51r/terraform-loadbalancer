@@ -1,13 +1,13 @@
 # Terraform AWS Load Balancer Sample
 
-This repo contains Terraform configuration with AWS Load Balancer in 2 Different AWS Availability Zones that contain 2 EC2 Instances.
+This repo contains Terraform configuration with AWS Load Balancer in 2 Different AWS Availability Zones.
 
-It deploys total 18 resources in AWS:
-* VPC With Private and Public Subnets. (5 Resources)
-* EC2 Instances inside the Private Subnets in different AWS Availability Zones. (2 Resources)
-* Application Load Balancer with Route Table, Listener, Internet Gateway and Target Groups with 2 attachments. (7 Resources)
-* Security Groups - Private with HTTP Ports enabled and Public with all ports opened for the Load Balancer. (2 Resources)
-* Route Table Associations for the Public Subnets. (2 Resources)
+It deploys the following resources in AWS:
+* VPC With Private and Public Subnets. 
+* EC2 Instances inside the Private Subnets in different AWS Availability Zones. 
+* Application Load Balancer with Route Table, Listener, Internet Gateway and Target Groups with 2 attachments. 
+* Security Groups - Private with HTTP Ports enabled and Public with all ports opened for the Load Balancer. 
+* Route Table Associations for the Public Subnets.
 
 # Prerequisite
 
