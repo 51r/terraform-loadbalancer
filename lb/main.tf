@@ -1,28 +1,8 @@
-resource "aws_security_group" "public" {
-  name        = "${var.name}-allow-traffic"
-  description = "Allow traffic"
-  vpc_id      = var.aws_vpc
-
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_lb" "lb" {
   name               = "${var.name}-lb"
   subnets            = var.public_subnets
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.public.id]
+  security_groups    = [var.public_sg]
 
   tags = {
     Name  = "${var.name}-lb"
