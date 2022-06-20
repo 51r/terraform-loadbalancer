@@ -24,7 +24,6 @@ module "lb" {
   email          = var.email
   name           = var.name
   aws_vpc        = module.network.aws_vpc
-  ec2            = module.app.ec2
   instances      = var.instances
 }
 
@@ -37,6 +36,8 @@ module "app" {
   azs          = var.azs
   subnets_cidr = var.private_subnets_cidr
   instances    = var.instances
+  ec2          = module.app.ec2
+  tg           = module.lb.tg
 }
 
 output "public_url" {

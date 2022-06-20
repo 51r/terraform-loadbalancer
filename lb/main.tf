@@ -38,13 +38,6 @@ resource "aws_lb_target_group" "test-tf" {
   target_type = "instance"
 }
 
-resource "aws_lb_target_group_attachment" "ec2" {
-  count            = var.instances
-  target_group_arn = aws_lb_target_group.test-tf.arn
-  target_id        = var.ec2[count.index]
-  port             = 80
-}
-
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.lb.arn
   port              = "80"
@@ -58,4 +51,8 @@ resource "aws_lb_listener" "listener" {
 
 output "dns" {
   value = aws_lb.lb.dns_name
+}
+
+output "tg" {
+  value = aws_lb_target_group.test-tf.arn
 }

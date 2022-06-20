@@ -22,11 +22,6 @@ variable "ami_id" {
   default     = "ami-0e8040f700cdfdd53"
 }
 
-variable "aws_region" {
-  description = "Specify AWS Region"
-  default     = "eu-west-2"
-}
-
 variable "azs" {
   type        = list(string)
   description = "Specify AWS Availability Zones"
