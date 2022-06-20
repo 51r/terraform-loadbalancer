@@ -27,15 +27,15 @@ module "lb" {
 }
 
 module "app" {
-  source             = "./app"
-  depends_on = [module.network]
-  email              = var.email
-  name               = var.name
-  ami_id             = var.ami_id
-  instances          = var.instances
-  ec2                = module.app.ec2
-  tg                 = module.lb.tg
-  aws_vpc = module.network.aws_vpc
+  source          = "./app"
+  depends_on      = [module.network]
+  email           = var.email
+  name            = var.name
+  ami_id          = var.ami_id
+  instances       = var.instances
+  ec2             = module.app.ec2
+  tg              = module.lb.tg
+  aws_vpc         = module.network.aws_vpc
   private_subnets = module.network.private_subnets
 }
 
