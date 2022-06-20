@@ -1,6 +1,6 @@
 # Terraform AWS Load Balancer Sample
 
-This repo contains Terraform configuration with AWS Load Balancer in 2 Different AWS Availability Zones (in the following guide it's using `eu-west-2a` & `eu-west-2b`.
+This repo contains Terraform configuration with AWS Load Balancer in 2 Different AWS Availability Zones (in the guide I'm using `eu-west-2a` & `eu-west-2b`).
 
 It deploys the following resources in AWS:
 * VPC With Private and Public Subnets. 
