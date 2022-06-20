@@ -25,7 +25,7 @@ module "lb" {
   name           = var.name
   aws_vpc        = module.network.aws_vpc
   ec2            = module.app.ec2
-  instances = var.instances
+  instances      = var.instances
 }
 
 module "app" {
@@ -36,7 +36,7 @@ module "app" {
   aws_vpc      = module.network.aws_vpc
   azs          = var.azs
   subnets_cidr = var.private_subnets_cidr
-  instances = var.instances
+  instances    = var.instances
 }
 
 output "public_url" {
