@@ -49,11 +49,14 @@ terraform init
 terraform apply
 ```
 
-* The terraform will deploy the AWS resources and will printout the Public URL for the Load Balancer in the output:
+* The terraform will deploy the AWS resources and will printout the ARN for the Load Balancer in the output.
+
+|Output | Description |
+| --- | --- |
+|public_url|The ARN of the AWS Elastic Load Balancer|
+
+Your output should be simillar to:
+
 ```
-Apply complete! Resources: 26 added, 0 changed, 0 destroyed.
-
-Outputs:
-
 public_url = "YOURPREFIX-lb-******.eu-west-2.elb.amazonaws.com"
 ```
