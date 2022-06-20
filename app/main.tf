@@ -29,6 +29,7 @@ resource "aws_security_group" "private" {
 }
 
 data "aws_subnets" "private" {
+  depends_on = [aws_subnet.private]
   filter {
     name   = "vpc-id"
     values = [var.aws_vpc]
@@ -40,6 +41,7 @@ data "aws_subnets" "private" {
 }
 
 resource "aws_instance" "app" {
+  depends_on = [data.aws_subnets.private]
   count                  = var.instances
   ami                    = var.ami_id
   instance_type          = "t2.micro"
@@ -49,6 +51,13 @@ resource "aws_instance" "app" {
     Name  = "${var.name}-ec2-${count.index + 1}"
     email = var.email
   }
+}
+
+resource "aws_lb_target_group_attachment" "ec2" {
+  count            = var.instances
+  target_group_arn = var.tg
+  target_id        = var.ec2[count.index]
+  port             = 80
 }
 
 output "ec2" {

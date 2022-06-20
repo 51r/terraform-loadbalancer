@@ -25,3 +25,10 @@ variable "aws_vpc" {
 variable "instances" {
   description = "Specify the number of instances"
 }
+
+variable "tg" {
+  description = "Target Group"
+}
+variable "ec2" {
+  
+}
