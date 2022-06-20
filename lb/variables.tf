@@ -13,7 +13,3 @@ variable "aws_vpc" {
 variable "public_subnets" {
   description = "Specify Public Subnets IDs"
 }
-
-variable "public_sg" {
-  description = "Specify Public Security Group"
-}

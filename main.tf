@@ -8,12 +8,6 @@ terraform {
   required_version = ">= 1.1.9"
 }
 
-module "sg" {
-  source  = "./sg"
-  aws_vpc = module.network.aws_vpc
-  name    = var.name
-}
-
 module "network" {
   source               = "./network"
   public_subnets_cidr  = var.public_subnets_cidr
@@ -30,19 +24,19 @@ module "lb" {
   email          = var.email
   name           = var.name
   aws_vpc        = module.network.aws_vpc
-  public_sg      = module.sg.public_sg
 }
 
 module "app" {
   source             = "./app"
+  depends_on = [module.network]
   email              = var.email
   name               = var.name
   ami_id             = var.ami_id
   instances          = var.instances
   ec2                = module.app.ec2
   tg                 = module.lb.tg
-  private_sg         = module.sg.private_sg
-  private_subnets_id = module.network.private_subnets_id
+  aws_vpc = module.network.aws_vpc
+  private_subnets = module.network.private_subnets
 }
 
 output "public_url" {
