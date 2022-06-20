@@ -16,26 +16,25 @@ It deploys the following resources in AWS:
 
 # How to use the repo:
 
-### 1. Clone Locally the repo:
+1. Clone Locally the repo:
 ```
 git clone https://github.com/51r/terraform-loadbalancer.git
 ```
 
-### 2. Make sure you are in the repo root:
+2. Make sure you are in the repo root:
 ```
 cd terraform-loadbalancer
 ```
 
-### 3. Add/Modify the variables inside variables.tf
-<img width="453" alt="Screen Shot 2022-06-20 at 9 26 11 AM" src="https://user-images.githubusercontent.com/52199951/174538310-3014a42a-9bec-48b0-b771-03a2ee7ad081.png">
+3. Add/Modify the variables inside variables.tf
 
 
-### 4. Initialize Terraform:
+4. Initialize Terraform:
 ```
 terraform init
 ```
 
-### 5.Apply the plan:
+5.Apply the plan:
 ```
 terraform apply
 ```
