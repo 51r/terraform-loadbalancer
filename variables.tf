@@ -12,7 +12,7 @@ variable "email" {
 
 variable "instances" {
   type        = string
-  description = "Specify how much instances should be build, this number should be odd (2,4,6..)"
+  description = "Specify how much instances should be build, this number should be even (2,4,6..)"
   default     = "6"
 }
 
