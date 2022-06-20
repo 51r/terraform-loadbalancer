@@ -18,10 +18,6 @@ variable "tg" {
   description = "Target Group"
 }
 
-variable "ec2" {
-  description = "ec2 names"
-}
-
 variable "aws_vpc" {
   default = "AWS VPC ID"
 }

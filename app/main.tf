@@ -33,10 +33,6 @@ resource "aws_instance" "app" {
 resource "aws_lb_target_group_attachment" "ec2" {
   count            = var.instances
   target_group_arn = var.tg
-  target_id        = var.ec2[count.index]
+  target_id        = aws_instance.app.*.id[count.index]
   port             = 80
-}
-
-output "ec2" {
-  value = aws_instance.app.*.id
 }
