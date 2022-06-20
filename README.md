@@ -49,7 +49,7 @@ terraform init
 terraform apply
 ```
 
-* The terraform will deploy the AWS resources and will printout the ARN for the Load Balancer in the output.
+* The terraform will deploy the AWS resources and will printout the outputs.
 
 |Output | Description |
 | --- | --- |
