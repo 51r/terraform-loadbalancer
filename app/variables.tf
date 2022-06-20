@@ -22,10 +22,10 @@ variable "ec2" {
   description = "ec2 names"
 }
 
-variable "private_sg" {
-  description = "Private Security Group"
+variable "aws_vpc" {
+  default = "AWS VPC ID"
 }
 
-variable "private_subnets_id" {
-  description = "Subnets ID from data block"
+variable "private_subnets" {
+  description = "Private Subnets ID"
 }

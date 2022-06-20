@@ -39,18 +39,6 @@ resource "aws_subnet" "private" {
   }
 }
 
-data "aws_subnets" "private" {
-  depends_on = [aws_subnet.private]
-  filter {
-    name   = "vpc-id"
-    values = [aws_vpc.vpc.id]
-  }
-  filter {
-    name   = "cidr"
-    values = var.private_subnets_cidr
-  }
-}
-
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.vpc.id
   route {
@@ -79,8 +67,4 @@ output "public_subnets" {
 
 output "private_subnets" {
   value = aws_subnet.private[*].id
-}
-
-output "private_subnets_id" {
-  value = data.aws_subnets.private.ids
 }
