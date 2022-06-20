@@ -11,7 +11,7 @@ variable "email" {
 }
 
 variable "instances" {
-  type        = string
+  type        = number
   description = "Specify how much instances should be deployed"
   default     = "6"
 }

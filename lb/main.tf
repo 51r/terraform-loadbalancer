@@ -49,6 +49,7 @@ resource "aws_lb_listener" "listener" {
   }
 }
 
+
 output "dns" {
   value = aws_lb.lb.dns_name
 }

@@ -8,6 +8,7 @@ terraform {
   required_version = ">= 1.1.9"
 }
 
+
 module "network" {
   source               = "./network"
   name                 = var.name
@@ -37,6 +38,7 @@ module "app" {
   tg              = module.lb.tg
   depends_on      = [module.network]
 }
+
 
 output "public_url" {
   value = module.lb.dns
