@@ -27,7 +27,7 @@ cd terraform-loadbalancer
 ```
 
 ### 3. Add/Modify the variables inside variables.tf
-<img width="632" alt="Screen Shot 2022-06-20 at 9 12 01 AM" src="https://user-images.githubusercontent.com/52199951/174536359-43773144-07aa-4b61-9418-3453f6167f5e.png">
+<img width="644" alt="Screen Shot 2022-06-20 at 9 17 12 AM" src="https://user-images.githubusercontent.com/52199951/174537075-5ebf32bb-b540-4a1b-b767-84c329d165c0.png">
 
 
 ### 4. Initialize Terraform:
