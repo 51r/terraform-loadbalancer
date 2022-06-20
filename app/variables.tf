@@ -10,18 +10,6 @@ variable "name" {
   description = "Specify the prefix name for the AWS resources"
 }
 
-variable "subnets_cidr" {
-  description = "Specify the subnet CIDR block"
-}
-
-variable "azs" {
-  description = "Specify Availability Zones"
-}
-
-variable "aws_vpc" {
-  description = "Specify AWS VPC ID"
-}
-
 variable "instances" {
   description = "Specify the number of instances"
 }
@@ -29,6 +17,15 @@ variable "instances" {
 variable "tg" {
   description = "Target Group"
 }
+
 variable "ec2" {
-  
+  description = "ec2 names"
+}
+
+variable "private_sg" {
+  description = "Private Security Group"
+}
+
+variable "private_subnets_id" {
+  description = "Subnets ID from data block"
 }

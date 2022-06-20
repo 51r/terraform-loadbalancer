@@ -11,9 +11,9 @@ variable "aws_vpc" {
 }
 
 variable "public_subnets" {
-  description = "Specify public subnets IDs"
+  description = "Specify Public Subnets IDs"
 }
 
-variable "instances" {
-  description = "SPecify EC2 Instances count"
+variable "public_sg" {
+  description = "Specify Public Security Group"
 }

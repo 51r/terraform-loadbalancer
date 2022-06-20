@@ -10,7 +10,11 @@ variable "name" {
   description = "Specify the prefix name for the AWS resources"
 }
 
-variable "subnets_cidr" {
+variable "public_subnets_cidr" {
+  description = "Specify Subnets CIDR Blocks"
+}
+
+variable "private_subnets_cidr" {
   description = "Specify Subnets CIDR Blocks"
 }
 

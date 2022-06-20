@@ -17,15 +17,37 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-resource "aws_subnet" "public_subnet" {
-  count                   = length(var.subnets_cidr)
+resource "aws_subnet" "public" {
+  count                   = length(var.public_subnets_cidr)
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = element(var.subnets_cidr, count.index)
+  cidr_block              = element(var.public_subnets_cidr, count.index)
   availability_zone       = element(var.azs, count.index)
   map_public_ip_on_launch = true
   tags = {
     Name  = "${var.name}-public-subnet${count.index + 1}"
     email = var.email
+  }
+}
+
+resource "aws_subnet" "private" {
+  count             = length(var.private_subnets_cidr)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = element(var.private_subnets_cidr, count.index)
+  availability_zone = element(var.azs, count.index)
+  tags = {
+    Name = "${var.name}-private-subnet-${count.index + 1}"
+  }
+}
+
+data "aws_subnets" "private" {
+  depends_on = [aws_subnet.private]
+  filter {
+    name   = "vpc-id"
+    values = [aws_vpc.vpc.id]
+  }
+  filter {
+    name   = "cidr"
+    values = var.private_subnets_cidr
   }
 }
 
@@ -42,8 +64,8 @@ resource "aws_route_table" "public_rt" {
 }
 
 resource "aws_route_table_association" "a" {
-  count          = length(var.subnets_cidr)
-  subnet_id      = element(aws_subnet.public_subnet.*.id, count.index)
+  count          = length(var.public_subnets_cidr)
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.public_rt.id
 }
 
@@ -52,5 +74,13 @@ output "aws_vpc" {
 }
 
 output "public_subnets" {
-  value = aws_subnet.public_subnet[*].id
+  value = aws_subnet.public[*].id
+}
+
+output "private_subnets" {
+  value = aws_subnet.private[*].id
+}
+
+output "private_subnets_id" {
+  value = data.aws_subnets.private.ids
 }
