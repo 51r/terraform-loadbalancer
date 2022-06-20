@@ -28,12 +28,28 @@ resource "aws_security_group" "private" {
   }
 }
 
+data "aws_subnets" "private" {
+  filter {
+    name   = "vpc-id"
+    values = [var.aws_vpc]
+  }
+  filter {
+        name = "cidr"
+    values = var.subnets_cidr
+  }
+}
+
+locals {
+ formatted_count = [for index in range(var.instances) : format("0%s", index + 1)]
+ instances_count = toset(local.formatted_count)
+}
+
 resource "aws_instance" "app" {
-  count           = length(var.subnets_cidr)
-  ami             = var.ami_id
-  instance_type   = "t2.micro"
-  security_groups = [aws_security_group.private.id]
-  subnet_id       = element(aws_subnet.private.*.id, count.index)
+  count         = var.instances
+  ami           = var.ami_id
+  instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.private.id]
+  subnet_id     = data.aws_subnets.private.ids[count.index % length(data.aws_subnets.private.ids)]
   tags = {
     Name  = "${var.name}-ec2-${count.index + 1}"
     email = var.email
