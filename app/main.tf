@@ -39,11 +39,6 @@ data "aws_subnets" "private" {
   }
 }
 
-locals {
-  formatted_count = [for index in range(var.instances) : format("0%s", index + 1)]
-  instances_count = toset(local.formatted_count)
-}
-
 resource "aws_instance" "app" {
   count                  = var.instances
   ami                    = var.ami_id
